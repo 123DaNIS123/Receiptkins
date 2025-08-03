@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.receipt.Name}} - Receiptkins</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="recipe-page">
+        <div class="recipe-sidebar left"></div>
+        
+        <div class="recipe-content">
+            <button class="close-button" onclick="window.location.href='/'">✕</button>
+            
+            <div class="recipe-header">
+                <h1 class="recipe-name">{{.receipt.Name}}</h1>
+                <p class="recipe-author-detail">от {{.receipt.Author}}</p>
+            </div>
+            
+            <div class="ingredients-section">
+                <h2>Ингредиенты:</h2>
+                <ul class="ingredients-list">
+                    {{range .ingredients}}
+                    <li>
+                        <span class="ingredient-name">{{.name}}</span>
+                        <span class="ingredient-quantity">{{.quantity}}</span>
+                    </li>
+                    {{end}}
+                </ul>
+            </div>
+            
+            <div class="algorithm-section">
+                <h2>Способ приготовления:</h2>
+                <div class="algorithm-text">{{.receipt.Algorithm}}</div>
+            </div>
+        </div>
+        
+        <div class="recipe-sidebar right"></div>
+    </div>
+</body>
+</html>

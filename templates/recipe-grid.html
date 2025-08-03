@@ -1,0 +1,11 @@
+{{range .receipts}}
+<div class="recipe-card" onclick="window.location.href='/recipe/{{.ID}}'">
+    <div class="recipe-image">
+        <img src="/placeholder.svg?height=240&width=320" alt="{{.Name}}">
+    </div>
+    <div class="recipe-info">
+        <h3 class="recipe-title">{{.Name}}</h3>
+        <p class="recipe-author">от {{.Author}}</p>
+    </div>
+</div>
+{{end}}

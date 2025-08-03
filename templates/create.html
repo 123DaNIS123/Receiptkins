@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать рецепт - Receiptkins</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div class="create-page">
+        <div class="create-container">
+            <h1>Создать новый рецепт</h1>
+            
+            <form id="create-form" class="create-form">
+                <div class="form-group">
+                    <label for="name">Название рецепта:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="author">Автор:</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ingredients">Ингредиенты:</label>
+                    <textarea id="ingredients" name="ingredients" placeholder="Формат: Мука: 500г|Яйца: 2 шт|Молоко: 250мл" required></textarea>
+                    <small>Разделяйте ингредиенты символом |, а название и количество символом :</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="algorithm">Способ приготовления:</label>
+                    <textarea id="algorithm" name="algorithm" rows="8" required></textarea>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="submit-button">Создать рецепт</button>
+                    <a href="/" class="cancel-button">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('create-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                author: formData.get('author'),
+                ingredients: formData.get('ingredients'),
+                algorithm: formData.get('algorithm')
+            };
+            
+            try {
+                const response = await fetch('/api/receipts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    window.location.href = '/';
+                } else {
+                    alert('Ошибка при создании рецепта');
+                }
+            } catch (error) {
+                alert('Ошибка при создании рецепта');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receiptkins</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Search Section -->
+        <div class="search-section">
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Поиск рецептов..."
+                hx-get="/search"
+                hx-trigger="keyup changed delay:300ms"
+                hx-target="#recipe-grid"
+                hx-include="this"
+                name="q"
+            >
+        </div>
+
+        <!-- Recipe Grid -->
+        <div class="grid-container">
+            <div id="recipe-grid" class="recipe-grid">
+                {{template "recipe-grid.html" .}}
+            </div>
+        </div>
+
+        <!-- Create Button -->
+        <div class="create-button-container">
+            <a href="/create" class="create-button">Добавить рецепт</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 Receiptkins. Создано с ❤️ для любителей готовить.</p>
+        </div>
+    </div>
+</body>
+</html>
